@@ -12,6 +12,14 @@ and open the template in the editor.
 	</head>
 	<body>
 		<div>TODO write content</div>
-		<a href="menu.jsp">menú</a>
+
+		<form method="POST" action="/EjemploJSPconAutenticacion/LoginServlet">
+			<label for="txtUsername">Username</label>
+			<input type="text" name="txtUsername"/>
+			<label for="txtPassword">Password</label>
+			<input type="text" name="txtPassword"/>
+			
+			<input type="submit" value="Enviar" />
+		</form>
 	</body>
 </html>

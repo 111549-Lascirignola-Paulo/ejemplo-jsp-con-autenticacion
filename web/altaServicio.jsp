@@ -16,7 +16,7 @@
     <body>
         <h1>Alta Servicio</h1>
 
-		<form method="POST" action="/EjemploJSPconAutenticacion/AltaServicioServlet"> 
+		<form method="POST" action="/EjemploJSPconAutenticacion/AltaServicioServlet" onsubmit="validar();"> 
 
 			<label for="cboTipo">Tipo</label>
 			<select name="cboTipo" >
@@ -35,4 +35,11 @@
 			<input type="submit" value="Enviar" />
 		</form>
     </body>
+	<script>
+		function validar() {
+			// document.getElementByName("txtDescripcion")
+			// si es vacio retornar false
+			return true;
+		}
+	</script>
 </html>

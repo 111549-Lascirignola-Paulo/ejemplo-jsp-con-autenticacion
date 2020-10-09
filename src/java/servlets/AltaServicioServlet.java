@@ -68,7 +68,8 @@ public class AltaServicioServlet extends HttpServlet {
 		TipoServicio tipo = g.obtenerTipoServicio(Integer.parseInt(tipoId));
 		g.insertarServicio(new Servicio(tipo, descripcion, costo));
 
-
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListadoDeServiciosServlet");
+		rd.forward(request, response);
 	}
 
 	/**

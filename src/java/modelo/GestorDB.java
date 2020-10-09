@@ -141,4 +141,11 @@ public class GestorDB {
 		return lista;
 	}
 
+	public boolean existeUsuario(String username, String password) {
+		if (username.equals("m") && password.equals("123")) {
+			return true;
+		}
+		return false;
+	}
+
 }
