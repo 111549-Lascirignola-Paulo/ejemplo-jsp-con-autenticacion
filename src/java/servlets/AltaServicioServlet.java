@@ -6,12 +6,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.GestorDB;
+import modelo.Servicio;
+import modelo.TipoServicio;
 
 /**
  *
@@ -33,8 +37,14 @@ public class AltaServicioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 
-		
+		GestorDB g = new GestorDB();	
 
+		ArrayList<TipoServicio> tiposServicios = g.obtenerTiposServicio();
+
+		request.setAttribute("lista", tiposServicios);
+
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/altaServicio.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -51,11 +61,12 @@ public class AltaServicioServlet extends HttpServlet {
 
 		GestorDB g = new GestorDB();
 
-		String tipo = request.getParameter("txtTipo");
+		String tipoId = request.getParameter("cboTipo");
 		String descripcion = request.getParameter("txtDescripcion");
 		Double costo = Double.parseDouble(request.getParameter("txtCosto"));
 		
-		//g.insertarServicio(new Servicio(tipo, descripcion, costo));
+		TipoServicio tipo = g.obtenerTipoServicio(Integer.parseInt(tipoId));
+		g.insertarServicio(new Servicio(tipo, descripcion, costo));
 
 
 	}

@@ -94,7 +94,7 @@ public class GestorDB {
 		return inserto;
 	}
 
-	private TipoServicio obtenerTipoServicio(int tipoId) {
+	public TipoServicio obtenerTipoServicio(int tipoId) {
 		TipoServicio resultado = null;
 
 		try {
@@ -120,7 +120,7 @@ public class GestorDB {
 		ArrayList<TipoServicio> lista = new ArrayList<TipoServicio>();
 		try {
 			abrirConexion();
-			String sql = "select * from TipoServicio";
+			String sql = "select * from TiposServicio";
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
@@ -140,4 +140,5 @@ public class GestorDB {
 		}
 		return lista;
 	}
+
 }

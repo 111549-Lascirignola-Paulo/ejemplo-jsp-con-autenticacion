@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,8 +17,16 @@
         <h1>Alta Servicio</h1>
 
 		<form method="POST" action="/EjemploJSPconAutenticacion/AltaServicioServlet"> 
-			<label for="txtTipo">Tipo</label>
-			<input type="text" name="txtTipo"/>
+
+			<label for="cboTipo">Tipo</label>
+			<select name="cboTipo" >
+
+				<c:forEach var="t" items="${lista}">
+					<option value="${t.id}">${t.descripcion}</option>
+				</c:forEach>
+
+				
+			</select>
 			<label for="txtDescripcion">Descripcion</label>
 			<input type="text" name="txtDescripcion"/>
 			<label for="txtCosto">Costo</label>
