@@ -6,14 +6,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.GestorDB;
-import modelo.Servicio;
 
 /**
  *
@@ -21,32 +19,6 @@ import modelo.Servicio;
  */
 @WebServlet(name = "AltaServicioServlet", urlPatterns = {"/AltaServicioServlet"})
 public class AltaServicioServlet extends HttpServlet {
-
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet AltaServicioServlet</title>");			
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet AltaServicioServlet at " + request.getContextPath() + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		}
-	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
@@ -60,7 +32,9 @@ public class AltaServicioServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		processRequest(request, response);
+
+		
+
 	}
 
 	/**
@@ -81,7 +55,7 @@ public class AltaServicioServlet extends HttpServlet {
 		String descripcion = request.getParameter("txtDescripcion");
 		Double costo = Double.parseDouble(request.getParameter("txtCosto"));
 		
-		g.insertarServicio(new Servicio(tipo, descripcion, costo));
+		//g.insertarServicio(new Servicio(tipo, descripcion, costo));
 
 
 	}

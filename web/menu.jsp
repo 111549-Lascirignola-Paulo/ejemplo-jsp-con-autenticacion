@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Menú</h1>
-		<a href="/EjemploJSPconAutenticacion/altaServicio.jsp">Alta de Servicio</a>
+		<a href="/EjemploJSPconAutenticacion/AltaServicioServlet">Alta de Servicio</a>
 		<a href="/EjemploJSPconAutenticacion/ListadoDeServiciosServlet">Listado de Servicios</a>
 		<a href="">Estadisticas</a>
     </body>

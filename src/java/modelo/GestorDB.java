@@ -54,9 +54,15 @@ public class GestorDB {
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String tipo = rs.getString("tipo");
+				int tipoId = rs.getInt("tipo");
 				String descripcion = rs.getString("descripcion");
 				double costo = rs.getFloat("costo");
+
+				//con el id de tipo de servicio
+				//buscar el servicio correspondiente de la BD
+				
+				TipoServicio tipo = obtenerTipoServicio(tipoId); //buscar en la base de datos un tipo servicio con un ID como parametro
+
 				lista.add(new Servicio(id, tipo, descripcion, costo));
 			}
 			rs.close();
@@ -74,7 +80,7 @@ public class GestorDB {
 			abrirConexion();
 			String sql = "INSERT INTO Servicios (tipo, descripcion, costo) VALUES (?,?,?)";
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, servicio.getTipo());
+			st.setInt(1, servicio.getTipo().getId());
 			st.setString(2, servicio.getDescripcion());
 			st.setDouble(3, servicio.getCosto());
 			st.execute();
@@ -86,5 +92,52 @@ public class GestorDB {
 		}
 
 		return inserto;
+	}
+
+	private TipoServicio obtenerTipoServicio(int tipoId) {
+		TipoServicio resultado = null;
+
+		try {
+			abrirConexion();
+			String sql = "SELECT * FROM TiposServicio WHERE id = ?;";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, tipoId); 
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				String descripcion = rs.getString("descripcion");
+				resultado = new TipoServicio(tipoId, descripcion);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return resultado;
+	}
+
+	public ArrayList<TipoServicio> obtenerTiposServicio() {
+		ArrayList<TipoServicio> lista = new ArrayList<TipoServicio>();
+		try {
+			abrirConexion();
+			String sql = "select * from TipoServicio";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String descripcion = rs.getString("descripcion");
+
+				//con el id de tipo de servicio
+				//buscar el servicio correspondiente de la BD
+				
+				lista.add(new TipoServicio(id, descripcion));
+			}
+			rs.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		return lista;
 	}
 }

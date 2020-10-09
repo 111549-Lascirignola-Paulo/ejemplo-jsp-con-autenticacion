@@ -11,18 +11,18 @@ package modelo;
  */
 public class Servicio {
 	private int id;
-	private String tipo;
+	private TipoServicio tipo;
 	private String descripcion;
 	private double costo;	
 
-	public Servicio(int id, String tipo, String descripcion, double costo) {
+	public Servicio(int id, TipoServicio tipo, String descripcion, double costo) {
 		this.id = id;
 		this.tipo = tipo;
 		this.descripcion = descripcion;
 		this.costo = costo;
 	}
 
-	public Servicio(String tipo, String descripcion, double costo) {
+	public Servicio(TipoServicio tipo, String descripcion, double costo) {
 		this(-1, tipo, descripcion, costo);
 	}
 
@@ -34,11 +34,11 @@ public class Servicio {
 		this.id = id;
 	}
 
-	public String getTipo() {
+	public TipoServicio getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoServicio tipo) {
 		this.tipo = tipo;
 	}
 

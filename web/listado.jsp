@@ -22,7 +22,7 @@
 			ArrayList<Servicio> lista = (ArrayList<Servicio>) request.getAttribute("lista");
 
 			for (Servicio servicio : lista) {
-				out.print("<tr><td>"+servicio.getId()+"<td><td>"+servicio.getTipo()+"<td><td>"+servicio.getDescripcion()+"<td><td>"+servicio.getCosto()+"<td></tr>");
+				out.print("<tr><td>"+servicio.getId()+"<td><td>"+servicio.getTipo().getDescripcion()+"<td><td>"+servicio.getDescripcion()+"<td><td>"+servicio.getCosto()+"<td></tr>");
 			}
 
 		%>
