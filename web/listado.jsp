@@ -7,6 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Servicio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,15 +19,16 @@
 
 		<table>
 
-		<%
-			ArrayList<Servicio> lista = (ArrayList<Servicio>) request.getAttribute("lista");
-
-			for (Servicio servicio : lista) {
-				out.print("<tr><td>"+servicio.getId()+"<td><td>"+servicio.getTipo().getDescripcion()+"<td><td>"+servicio.getDescripcion()+"<td><td>"+servicio.getCosto()+"<td></tr>");
-			}
-
-		%>
+			<c:forEach var="servicio" items="${lista}">
+				<tr>
+					<td>${servicio.id}</td>
+					<td>${servicio.tipo.descripcion}</td>
+					<td>${servicio.descripcion}</td>
+					<td>${servicio.costo}</td>
+					<td><a href="/EjemploJSPconAutenticacion/EliminarServlet?id=${servicio.id}">eliminar</a></td>
+				</tr>
+			</c:forEach>
 
 		</table>
-    </body>
+	</body>
 </html>

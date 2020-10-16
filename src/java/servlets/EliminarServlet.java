@@ -6,7 +6,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.GestorDB;
-import modelo.Servicio;
 
 /**
  *
  * @author mnava
  */
-@WebServlet(name = "ListadoDeServiciosServlet", urlPatterns = {"/ListadoDeServiciosServlet"})
-public class ListadoDeServiciosServlet extends HttpServlet {
+@WebServlet(name = "EliminarServlet", urlPatterns = {"/EliminarServlet"})
+public class EliminarServlet extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +33,17 @@ public class ListadoDeServiciosServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 
-		//autenticacion
-		if (request.getSession().getAttribute("usuario") == null) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
-			return;
-		}
+		String idParaBorrar = (String) request.getParameter("id");
+		int id = Integer.parseInt(idParaBorrar);
 
 		GestorDB g = new GestorDB();
-		ArrayList<Servicio> servicios = g.obtenerServicios();
+		g.eliminarServicio(id);
 
-		request.setAttribute("lista", servicios);
-
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/listado.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListadoDeServiciosServlet");
 		rd.forward(request, response);
 	}
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *

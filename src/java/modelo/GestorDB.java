@@ -142,10 +142,29 @@ public class GestorDB {
 	}
 
 	public boolean existeUsuario(String username, String password) {
-		if (username.equals("m") && password.equals("123")) {
+		// comparar el username y password con la base de datos
+		// Advertencia:Ojo que las contraseñas deberían estar encriptadas en la BD BCrypt
+		if (username.equals("martin") && password.equals("123")) {
 			return true;
 		}
 		return false;
+	}
+
+	public void eliminarServicio(int id) {
+		//Abrir conexion
+		//hacer la consulta con delete where id = id
+		//cerramos conexion
+		try {
+			abrirConexion();
+			String sql = "DELETE FROM Servicios WHERE id = ?;";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, id); 
+			st.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
 	}
 
 }

@@ -14,6 +14,7 @@
     <body>
 
 		<%= request.getSession().getAttribute("usuario") %>
+		<a href="/EjemploJSPconAutenticacion/LogoutServlet">Salir</a>
 		
         <h1>Menú</h1>
 		<a href="/EjemploJSPconAutenticacion/AltaServicioServlet">Alta de Servicio</a>

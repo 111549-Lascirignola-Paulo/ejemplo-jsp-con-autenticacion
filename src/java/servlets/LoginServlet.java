@@ -75,6 +75,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 
+		//Chequear si las credenciales corresponden a lo que está en la BD
 		GestorDB g = new GestorDB();
 
 		String username = request.getParameter("txtUsername");
@@ -90,7 +91,9 @@ public class LoginServlet extends HttpServlet {
 			rd.forward(request, response);
 		} else {
 			
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+			request.setAttribute("error", "Usuario o contraseña incorrecta incorrecto");
+
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);
 		}
 	}
