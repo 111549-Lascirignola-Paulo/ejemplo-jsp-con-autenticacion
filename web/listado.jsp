@@ -25,10 +25,12 @@
 					<td>${servicio.tipo.descripcion}</td>
 					<td>${servicio.descripcion}</td>
 					<td>${servicio.costo}</td>
+					<td><a href="/EjemploJSPconAutenticacion/ModificarServlet?id=${servicio.id}">modificar</a></td>
 					<td><a href="/EjemploJSPconAutenticacion/EliminarServlet?id=${servicio.id}">eliminar</a></td>
 				</tr>
 			</c:forEach>
 
 		</table>
+		<a href="/EjemploJSPconAutenticacion/AltaServicioServlet">Alta de Servicio</a>
 	</body>
 </html>

@@ -167,4 +167,51 @@ public class GestorDB {
 		}
 	}
 
+	public Servicio obtenerServicioPorId(int id) {
+		Servicio s = null;
+		try {
+			abrirConexion();
+			String sql = "select * from Servicios WHERE id=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, id); 
+
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				int tipoId = rs.getInt("tipo");
+				String descripcion = rs.getString("descripcion");
+				double costo = rs.getFloat("costo");
+
+				TipoServicio tipoDeServicio = obtenerTipoServicio(tipoId);
+
+				s = new Servicio(id, tipoDeServicio, descripcion, costo);
+			}
+			rs.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		return s;
+	}
+
+	public boolean modificarServicio(Servicio servicio) {
+		boolean inserto = false;
+		try {
+			abrirConexion();
+			String sql = "UPDATE Servicios SET tipo=?, descripcion=?, costo=? WHERE id=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, servicio.getTipo().getId());
+			st.setString(2, servicio.getDescripcion());
+			st.setDouble(3, servicio.getCosto());
+			st.setInt(4, servicio.getId());
+			st.executeUpdate();
+			inserto = true;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return inserto;
+	}
 }
